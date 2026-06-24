@@ -1,0 +1,575 @@
+/* ==========================================================================
+   SNOOZE - PUNCHH STYLESHEET
+
+   All colors, radii, and shadows below are aligned to the Snooze
+   website (snoozeeatery.com).
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. BRAND TOKENS & FONTS
+   ========================================================================== */
+
+@import url(//fonts.googleapis.com/css?family=Oswald);
+
+:root {
+  /* Core brand palette (hex referenced from Snooze brand styles) */
+  --sz-green: #007963;          /* PRIMARY action color (site theme color) */
+  --sz-green-dk: #0A3A34;       /* button hover / pressed */
+  --sz-brown: #422313;          /* body text, headings, input borders */
+  --sz-cream: #f2e5d8;          /* PAGE background */
+  --sz-white: #FFF8F1;          /* card / field / modal background (warm white) */
+  --sz-yellow: #FCB023;         /* accent / focus glow */
+  --sz-orange: #FF7C00;         /* secondary accent (used sparingly) */
+  --sz-red: #9C2228;            /* errors + required-field markers */
+  --sz-black: #291E16;          /* deepest text on light grounds */
+
+  /* Radii (referenced from brand styles) */
+  --sz-radius-input: 12px;      /* inputs / cards */
+  --sz-radius-pill: 999px;      /* buttons */
+
+  /* Shadows (referenced from brand styles) */
+  --sz-shadow-card: 0 12px 30px rgba(0, 0, 0, 0.08);
+  --sz-shadow-focus: 0 0 0 3px rgba(244, 180, 0, 0.25);   /* yellow focus glow */
+
+  --sz-font: "Oswald", sans-serif;
+}
+
+/* [NOTE] One default styling system across all components:
+   - Page sits on cream; forms/cards/modal sit on warm white.
+   - Primary buttons are green pills with cream text (matches site).
+   - Inputs use brown borders, soft 12px corners, warm-white fill.
+   - Required markers and errors use brand red #9C2228.
+   - Focus uses the brand yellow glow. */
+
+
+/* ==========================================================================
+   2. SHARED CONTAINER + LOGO
+   ========================================================================== */
+
+.contrast-red {
+  font-family: var(--sz-font) !important;
+}
+
+.contrast-red .alert-danger {
+  display: none;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 2rem auto auto;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background-color: var(--sz-white);   /* warm-white card on cream page */
+  border-radius: var(--sz-radius-input);
+  box-shadow: var(--sz-shadow-card);
+}
+
+.container::before {
+  content: url(https://www.snoozeeatery.com/wp-content/uploads/2019/07/Standard-Logo.svg);
+  width: 300px;
+  display: block;
+  margin: 0 auto 2rem;
+  height: 100%;
+  z-index: 0;
+}
+
+.profile-img {
+  display: none;
+}
+
+
+/* ==========================================================================
+   3. CUSTOM SIGN-IN FORM
+   ========================================================================== */
+
+.login-title {
+  font-size: 18px;
+  width: 35%;
+  margin: 2rem auto auto;
+  text-align: center;
+  color: var(--sz-brown);
+}
+
+.form-signin {
+  margin: auto;
+  width: 35%;
+}
+
+.form-signin input {
+  height: 44px;
+  width: 95%;
+  display: block;
+  margin: 1rem auto;
+  padding-left: 1rem;
+  background-color: var(--sz-white);
+  border: 1px solid var(--sz-brown);
+  border-radius: var(--sz-radius-input);
+  color: var(--sz-brown);
+  font-family: var(--sz-font) !important;
+  font-size: 1.25rem;
+}
+
+/* Primary submit -> green pill (matches live-site primary buttons) */
+.btn-block[type="submit"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  width: 100% !important;
+  margin: 1rem 0;
+  padding: 10px 0 8px;
+  background-color: var(--sz-green) !important;
+  border: solid 1px var(--sz-green) !important;
+  border-radius: var(--sz-radius-pill);
+  color: var(--sz-white);
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: var(--sz-font) !important;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-block[type="submit"]:hover {
+  background-color: var(--sz-green-dk) !important;
+  border-color: var(--sz-green-dk) !important;
+  cursor: pointer;
+}
+
+.btn-block[type="submit"]:focus {
+  outline: 0;
+  box-shadow: var(--sz-shadow-focus);
+}
+
+
+/* ==========================================================================
+   4. SHARED LINKS, ERRORS & REQUIRED-FIELD MARKERS
+   ========================================================================== */
+
+a {
+  text-transform: uppercase;
+  color: var(--sz-green);     /* links pick up the brand green */
+  font-weight: 700;
+}
+
+a:hover {
+  color: var(--sz-green-dk);
+}
+
+/* Readable error block in brand red */
+.error-messages {
+  background-color: var(--sz-red);
+  color: var(--sz-white);
+  padding: 0.5rem 0.75rem;
+  letter-spacing: 1px;
+  line-height: 18px;
+  border-radius: var(--sz-radius-input);
+}
+.error-messages:empty { display: none; }
+
+.email-error,
+.alert-message-error {
+  color: var(--sz-red);
+  font-size: 0.875rem;
+}
+
+/* Required-field asterisk */
+.field_with_errors label,
+.iframe-container form label {
+  position: relative;
+}
+
+.iframe-container form label::before {
+  position: absolute;
+  content: '*';
+  margin-right: 10px;
+  color: var(--sz-red);
+  left: 0;
+}
+
+.facebook-label {
+  display: none;
+}
+
+
+/* ==========================================================================
+   5. SIGN-UP FORM  (structure only; styling matches sign-in + brand)
+   ========================================================================== */
+
+/* Page-level background sits on cream behind the warm-white card */
+.iframe-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: var(--sz-cream);
+}
+
+.iframe-container .iframe-header {
+  display: none;
+}
+
+/* Inputs / selects / textareas — brand-aligned default */
+.iframe-container form input[type=text],
+.iframe-container form input[type=email],
+.iframe-container form input[type=password],
+.iframe-container form input[type=tel],
+.iframe-container form input[type=number],
+.iframe-container form input[type=date],
+.iframe-container form input[type=url],
+.iframe-container form select,
+.iframe-container form textarea {
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  height: 44px;
+  padding-left: 1rem;
+  margin: 1rem auto;
+  background-color: var(--sz-white);
+  border: 1px solid var(--sz-brown);
+  border-radius: var(--sz-radius-input);
+  color: var(--sz-brown);
+  font-family: var(--sz-font) !important;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.iframe-container form select,
+.iframe-container form textarea {
+  height: auto;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+}
+.iframe-container form textarea { resize: vertical; }
+
+.iframe-container form input:focus,
+.iframe-container form select:focus,
+.iframe-container form textarea:focus {
+  outline: 0;
+  border-color: var(--sz-green);
+  box-shadow: var(--sz-shadow-focus);   /* yellow brand glow */
+}
+
+.iframe-container form input::placeholder,
+.iframe-container form textarea::placeholder {
+  color: rgba(66, 35, 19, 0.5);
+  opacity: 1;
+}
+
+.iframe-container form input:disabled,
+.iframe-container form input[readonly],
+.iframe-container form select:disabled,
+.iframe-container form textarea:disabled {
+  background-color: #ede4d8;
+  opacity: 1;
+}
+
+.iframe-container form label {
+  margin-bottom: 1rem;
+  color: var(--sz-brown);
+}
+
+.iframe-container form .form-hint {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: var(--sz-brown);
+}
+.iframe-container form .form-hint:empty { display: none; }
+
+/* Primary submit -> green pill */
+.iframe-container form button[type=submit],
+.iframe-container form input[type=submit] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 44px;
+  margin: 1rem 0;
+  padding: 10px 0 8px;
+  background-color: var(--sz-green);
+  border: solid 1px var(--sz-green);
+  border-radius: var(--sz-radius-pill);
+  color: var(--sz-white);
+  font-family: var(--sz-font);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.iframe-container form button[type=submit]:hover,
+.iframe-container form input[type=submit]:hover {
+  background-color: var(--sz-green-dk);
+  border-color: var(--sz-green-dk);
+}
+
+.iframe-container form button[type=submit]:focus,
+.iframe-container form input[type=submit]:focus {
+  outline: 0;
+  box-shadow: var(--sz-shadow-focus);
+}
+
+.iframe-container form button[type=submit]:disabled,
+.iframe-container form input[type=submit]:disabled {
+  opacity: 0.65;
+}
+
+.submit-div {
+  display: inline-block;
+  width: 100%;
+}
+
+/* Birthday split selects render inline + format note */
+.birthday select {
+  width: auto;
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding-right: 2rem;
+}
+
+.birthday:after {
+  content: "Date is entered in DD/MM/YYYY format";
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--sz-brown);
+  font-size: 0.875rem;
+}
+
+/* Third-party sign-in buttons keep their own brand identity (Facebook),
+   but adopt brand radius for visual consistency. */
+.facebook-login-div {
+  width: 300px;
+  margin: 3rem auto 0;
+}
+
+.facebook-login-div .facebook-link {
+  font-size: 14px;
+  font-weight: 300;
+  width: 100%;
+}
+
+.facebook-login-div .facebook-link a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 44px;
+  margin-bottom: 1rem;
+  background-color: #1877f2;   /* Facebook brand blue (third-party) */
+  border-radius: var(--sz-radius-pill);
+  color: #fff;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.facebook-login-div .facebook-link a:hover {
+  color: #fff;
+}
+
+.apple-signin-button {
+  width: 100%;
+  height: 44px;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.info-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+
+/* ==========================================================================
+   6. SWEETALERT (swal) MODAL
+   ========================================================================== */
+
+.swal-overlay {
+  position: fixed;
+  inset: 0;
+  text-align: center;
+  font-size: 0;
+  overflow-y: auto;
+  background-color: rgba(41, 30, 22, 0.55);   /* brand-tinted black scrim */
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.swal-overlay:before {
+  content: " ";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+.swal-overlay--show-modal { opacity: 1; pointer-events: auto; }
+.swal-overlay--show-modal .swal-modal {
+  opacity: 1;
+  pointer-events: auto;
+  animation: showSweetAlert 0.3s;
+}
+
+.swal-modal {
+  width: 478px;
+  margin: 20px auto;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: var(--sz-white);
+  border-radius: var(--sz-radius-input);
+  box-shadow: var(--sz-shadow-card);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1);
+  transform-origin: 50% 50%;
+  z-index: 10001;
+  transition: transform 0.3s, opacity 0.2s;
+}
+
+@media (max-width: 500px) {
+  .swal-modal { width: calc(100% - 24px); margin: 16px auto; }
+}
+
+@keyframes showSweetAlert {
+  0% { transform: scale(1); }
+  1% { transform: scale(0.5); }
+  45% { transform: scale(1.05); }
+  80% { transform: scale(0.95); }
+  to { transform: scale(1); }
+}
+
+.swal-title {
+  font-family: var(--sz-font);
+  font-weight: 700;
+  letter-spacing: 0.25px;
+  text-transform: uppercase;
+  color: var(--sz-brown);
+  font-size: 24px;
+  text-align: center;
+  padding: 13px 16px;
+  margin-bottom: 0;
+}
+.swal-title:first-child { margin-top: 26px; }
+
+.swal-text {
+  font-family: var(--sz-font);
+  color: var(--sz-brown);
+  font-size: 16px;
+  text-align: center;
+  display: inline-block;
+  max-width: calc(100% - 20px);
+  padding: 0 10px;
+}
+.swal-text:first-child { margin-top: 24px; }
+.swal-text:last-child { margin-bottom: 32px; }
+
+.swal-footer {
+  background: transparent;
+  text-align: center;
+  padding: 13px 16px 24px;
+}
+.swal-button-container {
+  margin: 5px;
+  display: inline-block;
+  position: relative;
+}
+
+/* Primary modal button -> green pill */
+.swal-button {
+  font-family: var(--sz-font);
+  border: 2px solid var(--sz-green);
+  border-radius: var(--sz-radius-pill);
+  background-color: var(--sz-green);
+  color: var(--sz-white);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 12px 26px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.swal-button:not([disabled]):hover { background-color: var(--sz-green-dk); border-color: var(--sz-green-dk); }
+.swal-button:active { background-color: var(--sz-green-dk); }
+.swal-button:focus { outline: none; box-shadow: var(--sz-shadow-focus); }
+.swal-button[disabled] { opacity: 0.5; cursor: default; }
+
+/* Cancel -> outlined green ghost */
+.swal-button--cancel {
+  background-color: transparent;
+  color: var(--sz-green);
+  border: 2px solid var(--sz-green);
+}
+.swal-button--cancel:not([disabled]):hover { background-color: var(--sz-green); color: var(--sz-white); }
+.swal-button--cancel:active { background-color: var(--sz-green-dk); border-color: var(--sz-green-dk); }
+
+/* Danger -> brand red */
+.swal-button--danger { background-color: var(--sz-red); border-color: var(--sz-red); }
+.swal-button--danger:not([disabled]):hover { filter: brightness(0.95); }
+.swal-button--danger:focus { box-shadow: 0 0 0 3px rgba(156, 34, 40, 0.25); }
+
+/* Modal inputs */
+.swal-content { padding: 0 20px; margin-top: 20px; font-size: medium; }
+.swal-content:last-child { margin-bottom: 20px; }
+
+.swal-content__input,
+.swal-content__textarea {
+  -webkit-appearance: none;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 13px;
+  font-size: 14px;
+  font-family: var(--sz-font);
+  color: var(--sz-brown);
+  background-color: var(--sz-white);
+  border: 1px solid var(--sz-brown);
+  border-radius: var(--sz-radius-input);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.swal-content__input:focus,
+.swal-content__textarea:focus {
+  outline: none;
+  border-color: var(--sz-green);
+  box-shadow: var(--sz-shadow-focus);
+}
+.swal-content__textarea { resize: vertical; }
+
+/* Icons - brand-aligned colors */
+.swal-icon {
+  width: 80px; height: 80px;
+  border-width: 4px; border-style: solid; border-radius: 50%;
+  box-sizing: content-box;
+  margin: 20px auto;
+  position: relative;
+}
+.swal-icon--success { border-color: var(--sz-green); }
+.swal-icon--success__line { background-color: var(--sz-green); }
+.swal-icon--warning { border-color: var(--sz-yellow); }
+.swal-icon--warning__body,
+.swal-icon--warning__dot { background-color: var(--sz-yellow); }
+.swal-icon--error { border-color: var(--sz-red); }
+.swal-icon--error__line { background-color: var(--sz-red); }
+
+
+/* ==========================================================================
+   7. RESPONSIVE
+   ========================================================================== */
+
+@media only screen and (max-width: 550px) {
+  .form-signin {
+    width: 100% !important;
+    display: flex;
+    flex-flow: column;
+  }
+  .container::before { width: 95%; }
+  .contrast-red { width: 95%; display: flex; }
+  .login-title { width: 95% !important; }
+}
