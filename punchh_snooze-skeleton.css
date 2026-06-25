@@ -207,26 +207,27 @@ select:focus {
   box-shadow: var(--sz-shadow-focus);
 }
 
-/* Birthday row: three selects side by side, hint text on its own row below */
+/* Birthday row: three selects side by side */
 .birthday-group,
 .field--birthday,
 .birthday {
   display: flex;
-  flex-wrap: wrap;
   gap: 10px;
 }
 
 .birthday-group select,
 .birthday select {
   flex: 1;
-  min-width: 80px;
+  width: auto;
+  display: inline-block;
+  margin-right: 0.5rem;
   padding-right: 2rem;
 }
 
 .birthday:after {
   content: "Date is entered in DD/MM/YYYY format";
   display: block;
-  width: 100%;
+  margin-top: 0.5rem;
   color: var(--sz-brown);
   font-size: 0.875rem;
 }
@@ -299,10 +300,18 @@ input:invalid:not(:placeholder-shown),
   border-color: var(--sz-red);
 }
 
-/* Required-field asterisk — inline so it doesn't overlap the label text */
+/* Required-field asterisk */
+.field_with_errors label,
+.iframe-container form label {
+  position: relative;
+}
+
 .iframe-container form label::before {
-  content: '* ';
+  position: absolute;
+  content: '*';
+  margin-right: 10px;
   color: var(--sz-red);
+  left: 0;
 }
 
 /* ---------- Primary button (Login / Submit) ---------- */
