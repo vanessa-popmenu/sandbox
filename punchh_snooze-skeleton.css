@@ -41,7 +41,7 @@
   --font-display: 'OC Highway S9', 'Tay Birdie - reg', Oswald, sans-serif;
   --font-heading: 'OC Highway S3 - reg', 'OC Highway S6', Oswald, sans-serif;
   --font: 'Circular Std - Medium', 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: 'ABC Marfa Mono - Regular', 'Courier New', monospace;
+  --font-mono: 'Circular Std - Medium', 'Helvetica Neue', Arial, sans-serif;
 }
 
 
@@ -59,6 +59,15 @@ body {
 
 .contrast-red .alert-danger {
   display: none;
+}
+.signup-form {
+  margin: auto;
+}
+
+.text-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sz-green);
 }
 
 /* ---------- Shared container + logo ---------- */
@@ -176,6 +185,7 @@ input::placeholder {
   color: rgba(66, 35, 19, 0.5);
 }
 
+
 /* ---------- Select dropdowns (Birthday day/month/year, Favorite Location) ---------- */
 select {
   display: block;
@@ -216,6 +226,11 @@ select:focus {
   gap: 10px;
 }
 
+.birthday label {
+  min-width: 100%;
+  margin-bottom: 0;
+}
+
 .birthday-group select,
 .birthday select {
   flex: 1;
@@ -227,8 +242,10 @@ select:focus {
   content: "Date is entered in DD/MM/YYYY format";
   display: block;
   width: 100%;
-  color: var(--sz-brown);
-  font-size: 0.875rem;
+}
+
+.iframe-container form .birthday select {
+  margin-bottom: 3px; 
 }
 
 /* ---------- Checkboxes (T&C agreement, SMS opt-in) ---------- */
@@ -285,9 +302,10 @@ label > input[type="checkbox"] + label,
 
 .hint,
 .help-text,
-.field-hint {
+.field-hin, 
+.iframe-container form .form-hint, .birthday:after {
   display: block;
-  margin-top: 6px;
+  margin: 0 0 30px;
   font-size: 0.85rem;
   color: var(--text-muted);
 }
@@ -608,15 +626,15 @@ a[href*="privacy-policy"],
 }
 
 .iframe-container form label {
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   color: var(--sz-brown);
 }
 
-.iframe-container form .form-hint {
+/* .iframe-container form .form-hint {
   display: inline-block;
   font-size: 0.875rem;
   color: var(--sz-brown);
-}
+} */
 .iframe-container form .form-hint:empty { display: none; }
 
 /* Primary submit -> green pill */
