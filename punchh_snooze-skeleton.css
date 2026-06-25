@@ -1,0 +1,852 @@
+/* ============================================================
+   Snooze AM Eatery — Combined Stylesheet
+   Covers: sign-in + invite/registration pages
+   Targets: form, text inputs, selects, checkboxes,
+            validation messages, buttons, social logins, links
+   ============================================================ */
+
+@import url(//fonts.googleapis.com/css?family=Oswald);
+
+:root {
+  /* Core brand palette */
+  --sz-green: #007963;          /* PRIMARY action color */
+  --sz-green-dk: #0A3A34;       /* button hover / pressed */
+  --sz-orange: #FF7C00;         /* secondary CTA / headline accent */
+  --sz-dk-orange: #DC5710;      /* orange pressed state */
+  --sz-yellow: #FCB023;         /* accent / focus glow */
+  --sz-brown: #422313;          /* body text, input borders */
+  --sz-cream: #f2e5d8;          /* page background */
+  --sz-white: #FFF8F1;          /* card / field background (warm white) */
+  --sz-red: #9C2228;            /* errors + required-field markers */
+  --sz-black: #291E16;          /* deepest text on light grounds */
+
+  /* Radii */
+  --sz-radius-input: 12px;      /* inputs / select */
+  --sz-radius-card: 20px;       /* cards, containers, modals */
+  --sz-radius-pill: 999px;      /* buttons */
+
+  /* Shadows */
+  --sz-shadow-card: 0 12px 30px rgba(0, 0, 0, 0.08);
+  --sz-shadow-focus: 0 0 0 3px rgba(252, 176, 35, 0.25);   /* #FCB023 yellow glow */
+
+  /* Aliases for skeleton selectors */
+  --field-border: var(--sz-brown);
+  --field-focus: var(--sz-green);
+  --text-dark: var(--sz-brown);
+  --text-muted: rgba(66, 35, 19, 0.6);
+  --bg: var(--sz-cream);
+  --radius: var(--sz-radius-input);
+
+  /* Typography — brand fonts; Oswald is the web-safe fallback */
+  --font-display: 'OC Highway S9', 'Tay Birdie - reg', Oswald, sans-serif;
+  --font-heading: 'OC Highway S3 - reg', 'OC Highway S6', Oswald, sans-serif;
+  --font: 'Circular Std - Medium', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'ABC Marfa Mono - Regular', 'Courier New', monospace;
+}
+
+
+/* ---------- Layout / body ---------- */
+body {
+  font-family: var(--font);
+  color: var(--text-dark);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.contrast-red {
+  font-family: var(--font) !important;
+}
+
+.contrast-red .alert-danger {
+  display: none;
+}
+
+/* ---------- Shared container + logo ---------- */
+.container {
+  max-width: 1140px;
+  margin: 2rem auto auto;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background-color: var(--sz-white);
+  border-radius: var(--sz-radius-card);
+  border: 2px solid var(--sz-orange);
+  box-shadow: var(--sz-shadow-card);
+}
+
+.container::before {
+  content: url(https://www.snoozeeatery.com/wp-content/uploads/2019/07/Standard-Logo.svg);
+  width: 300px;
+  display: block;
+  margin: 0 auto 2rem;
+  height: 100%;
+  z-index: 0;
+}
+
+.profile-img {
+  display: none;
+}
+
+form {
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 8px 0;
+}
+
+/* ---------- Page heading ---------- */
+h1,
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--sz-orange);
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+}
+
+.login-title {
+  font-size: 18px;
+  width: 35%;
+  margin: 2rem auto auto;
+  text-align: center;
+  color: var(--sz-green);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+/* ---------- Field groups & labels ---------- */
+.form-group,
+.field {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--sz-brown);
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ---------- Text inputs (email, password, text, phone, zip, etc.) ---------- */
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="tel"],
+input[type="number"] {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  font-size: 1rem;
+  font-family: var(--font);
+  color: var(--sz-brown);
+  background: var(--sz-white);
+  border: 2px solid var(--sz-brown);
+  border-radius: var(--sz-radius-input);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="email"]:hover,
+input[type="password"]:hover,
+input[type="text"]:hover,
+input[type="tel"]:hover,
+input[type="number"]:hover {
+  border-color: var(--sz-green);
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--sz-green);
+  box-shadow: var(--sz-shadow-focus);
+}
+
+input::placeholder {
+  color: rgba(66, 35, 19, 0.5);
+}
+
+/* ---------- Select dropdowns (Birthday day/month/year, Favorite Location) ---------- */
+select {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 36px 12px 14px;
+  font-size: 1rem;
+  font-family: var(--font);
+  color: var(--sz-brown);
+  background-color: var(--sz-white);
+  border: 2px solid var(--sz-brown);
+  border-radius: var(--sz-radius-input);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%23422313' d='M6 8L0 0h12z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+select:hover {
+  border-color: var(--sz-green);
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--sz-green);
+  box-shadow: var(--sz-shadow-focus);
+}
+
+/* Birthday row: three selects side by side */
+.birthday-group,
+.field--birthday,
+.birthday {
+  display: flex;
+  gap: 10px;
+}
+
+.birthday-group select,
+.birthday select {
+  flex: 1;
+  width: auto;
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding-right: 2rem;
+}
+
+.birthday:after {
+  content: "Date is entered in DD/MM/YYYY format";
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--sz-brown);
+  font-size: 0.875rem;
+}
+
+/* ---------- Checkboxes (T&C agreement, SMS opt-in) ---------- */
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 2px 10px 0 0;
+  accent-color: var(--sz-green);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Make checkbox + text sit on one row */
+label:has(> input[type="checkbox"]) {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 14px;
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+label > input[type="checkbox"] + label,
+.checkbox-label {
+  display: inline;
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+
+/* ---------- Validation & helper messages ---------- */
+.error,
+.field-error,
+.invalid-feedback,
+.email-error,
+.alert-message-error {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: var(--sz-red);
+}
+
+/* Readable error block in brand red */
+.error-messages {
+  background-color: var(--sz-red);
+  color: var(--sz-white);
+  padding: 0.5rem 0.75rem;
+  letter-spacing: 1px;
+  line-height: 18px;
+  border-radius: var(--sz-radius-card);
+}
+.error-messages:empty { display: none; }
+
+.hint,
+.help-text,
+.field-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Highlight invalid inputs */
+input:invalid:not(:placeholder-shown),
+.has-error input,
+.has-error select {
+  border-color: var(--sz-red);
+}
+
+/* Required-field asterisk */
+.field_with_errors label,
+.iframe-container form label {
+  position: relative;
+}
+
+.iframe-container form label::before {
+  position: absolute;
+  content: '*';
+  margin-right: 10px;
+  color: var(--sz-red);
+  left: 0;
+}
+
+/* ---------- Primary button (Login / Submit) ---------- */
+button[type="submit"],
+input[type="submit"],
+.btn-primary,
+.btn-block[type="submit"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 44px;
+  padding: 10px 18px 8px;
+  margin-top: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--sz-white);
+  background: var(--sz-green);
+  border: solid 2px var(--sz-green);
+  border-radius: var(--sz-radius-pill);
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+button[type="submit"]:hover,
+input[type="submit"]:hover,
+.btn-primary:hover,
+.btn-block[type="submit"]:hover {
+  background-color: var(--sz-green-dk);
+  border-color: var(--sz-green-dk);
+  cursor: pointer;
+}
+
+button[type="submit"]:active,
+input[type="submit"]:active,
+.btn-primary:active {
+  background-color: var(--sz-green-dk);
+}
+
+button[type="submit"]:focus,
+input[type="submit"]:focus,
+.btn-primary:focus,
+.btn-block[type="submit"]:focus {
+  outline: none;
+  box-shadow: var(--sz-shadow-focus);
+}
+
+button[type="submit"]:disabled,
+input[type="submit"]:disabled {
+  opacity: 0.65;
+}
+
+.submit-div {
+  display: inline-block;
+  width: 100%;
+}
+
+/* ---------- Social sign-in / sign-up buttons ---------- */
+/* Facebook */
+a[href*="facebook"],
+.facebook-login,
+.btn-facebook {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 18px;
+  margin-top: 14px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  background: #1877f2;
+  border-radius: var(--sz-radius-pill);
+  transition: background 0.15s ease;
+}
+
+a[href*="facebook"]:hover,
+.btn-facebook:hover {
+  background: #1464d0;
+  color: #fff;
+}
+
+.facebook-label {
+  display: none;
+}
+
+.facebook-login-div {
+  width: 300px;
+  margin: 3rem auto 0;
+}
+
+.facebook-login-div .facebook-link {
+  font-size: 14px;
+  font-weight: 300;
+  width: 100%;
+}
+
+.facebook-login-div .facebook-link a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 44px;
+  margin-bottom: 1rem;
+  background-color: #1877f2;
+  border-radius: var(--sz-radius-pill);
+  color: #fff;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.facebook-login-div .facebook-link a:hover {
+  color: #fff;
+}
+
+/* Apple */
+.apple-signin,
+.btn-apple,
+[id*="appleid"],
+.apple-signin-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  height: 44px;
+  padding: 13px 18px;
+  margin-top: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #fff;
+  background: #000;
+  border-radius: var(--sz-radius-pill);
+  cursor: pointer;
+}
+
+.apple-signin:hover,
+.btn-apple:hover {
+  background: #1a1a1a;
+}
+
+/* ---------- Links (Forgot Password, Show all locations, FAQ, T&C, Privacy) ---------- */
+a {
+  color: var(--sz-green);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--sz-green-dk);
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px solid rgba(0, 121, 99, 0.5);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Forgot Password — give it breathing room */
+a[href*="password/new"] {
+  display: inline-block;
+  margin-top: 14px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Inline "Show all locations" link */
+.show-locations,
+a[href="#"] {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+/* Footer links (FAQ / T&C / Privacy Policy) */
+a[href*="zendesk"],
+a[href*="terms-of-use"],
+a[href*="privacy-policy"],
+.footer-links a {
+  font-size: 0.85rem;
+  margin: 0 6px;
+}
+
+/* ---------- Footer container ---------- */
+.footer,
+.footer-links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.info-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+
+/* ---------- Sign-in form ---------- */
+.form-signin {
+  margin: auto;
+  width: 35%;
+}
+
+.form-signin input {
+  height: 44px;
+  width: 95%;
+  display: block;
+  margin: 1rem auto;
+  padding-left: 1rem;
+  background-color: var(--sz-white);
+  border: 2px solid var(--sz-brown);
+  border-radius: var(--sz-radius-input);
+  color: var(--sz-brown);
+  font-family: var(--font) !important;
+  font-size: 1.25rem;
+}
+
+
+/* ---------- Sign-up / invite form (iframe-container) ---------- */
+/* Page-level background sits on cream behind the warm-white card */
+.iframe-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: var(--sz-cream);
+}
+
+.iframe-container .iframe-header {
+  display: none;
+}
+
+/* Inputs / selects / textareas — brand-aligned defaults */
+.iframe-container form input[type=text],
+.iframe-container form input[type=email],
+.iframe-container form input[type=password],
+.iframe-container form input[type=tel],
+.iframe-container form input[type=number],
+.iframe-container form input[type=date],
+.iframe-container form input[type=url],
+.iframe-container form select,
+.iframe-container form textarea {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  height: 44px;
+  padding-left: 1rem;
+  margin: 1rem auto;
+  background-color: var(--sz-white);
+  border: 2px solid var(--sz-brown);
+  border-radius: var(--sz-radius-input);
+  color: var(--sz-brown);
+  font-family: var(--font) !important;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.iframe-container form select,
+.iframe-container form textarea {
+  height: auto;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+}
+.iframe-container form textarea { resize: vertical; }
+
+.iframe-container form input:focus,
+.iframe-container form select:focus,
+.iframe-container form textarea:focus {
+  outline: 0;
+  border-color: var(--sz-green);
+  box-shadow: var(--sz-shadow-focus);
+}
+
+.iframe-container form input::placeholder,
+.iframe-container form textarea::placeholder {
+  color: rgba(66, 35, 19, 0.5);
+  opacity: 1;
+}
+
+.iframe-container form input:disabled,
+.iframe-container form input[readonly],
+.iframe-container form select:disabled,
+.iframe-container form textarea:disabled {
+  background-color: #ede4d8;
+  opacity: 1;
+}
+
+.iframe-container form label {
+  margin-bottom: 1rem;
+  color: var(--sz-brown);
+}
+
+.iframe-container form .form-hint {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: var(--sz-brown);
+}
+.iframe-container form .form-hint:empty { display: none; }
+
+/* Primary submit -> green pill */
+.iframe-container form button[type=submit],
+.iframe-container form input[type=submit] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 44px;
+  margin: 1rem 0;
+  padding: 10px 0 8px;
+  background-color: var(--sz-green);
+  border: solid 2px var(--sz-green);
+  border-radius: var(--sz-radius-pill);
+  color: var(--sz-white);
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.iframe-container form button[type=submit]:hover,
+.iframe-container form input[type=submit]:hover {
+  background-color: var(--sz-green-dk);
+  border-color: var(--sz-green-dk);
+}
+
+.iframe-container form button[type=submit]:focus,
+.iframe-container form input[type=submit]:focus {
+  outline: 0;
+  box-shadow: var(--sz-shadow-focus);
+}
+
+.iframe-container form button[type=submit]:disabled,
+.iframe-container form input[type=submit]:disabled {
+  opacity: 0.65;
+}
+
+
+/* ---------- SweetAlert (swal) modal ---------- */
+.swal-overlay {
+  position: fixed;
+  inset: 0;
+  text-align: center;
+  font-size: 0;
+  overflow-y: auto;
+  background-color: rgba(41, 30, 22, 0.55);   /* brand-tinted black scrim */
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.swal-overlay:before {
+  content: " ";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+.swal-overlay--show-modal { opacity: 1; pointer-events: auto; }
+.swal-overlay--show-modal .swal-modal {
+  opacity: 1;
+  pointer-events: auto;
+  animation: showSweetAlert 0.3s;
+}
+
+.swal-modal {
+  width: 478px;
+  margin: 20px auto;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: var(--sz-white);
+  border-radius: var(--sz-radius-card);
+  border: 2px solid var(--sz-orange);
+  box-shadow: var(--sz-shadow-card);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1);
+  transform-origin: 50% 50%;
+  z-index: 10001;
+  transition: transform 0.3s, opacity 0.2s;
+}
+
+@media (max-width: 500px) {
+  .swal-modal { width: calc(100% - 24px); margin: 16px auto; }
+}
+
+@keyframes showSweetAlert {
+  0%  { transform: scale(1); }
+  1%  { transform: scale(0.5); }
+  45% { transform: scale(1.05); }
+  80% { transform: scale(0.95); }
+  to  { transform: scale(1); }
+}
+
+.swal-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.25px;
+  text-transform: uppercase;
+  color: var(--sz-orange);
+  font-size: 24px;
+  text-align: center;
+  padding: 13px 16px;
+  margin-bottom: 0;
+}
+.swal-title:first-child { margin-top: 26px; }
+
+.swal-text {
+  font-family: var(--font);
+  color: var(--sz-brown);
+  font-size: 16px;
+  text-align: center;
+  display: inline-block;
+  max-width: calc(100% - 20px);
+  padding: 0 10px;
+}
+.swal-text:first-child { margin-top: 24px; }
+.swal-text:last-child  { margin-bottom: 32px; }
+
+.swal-footer {
+  background: transparent;
+  text-align: center;
+  padding: 13px 16px 24px;
+}
+.swal-button-container {
+  margin: 5px;
+  display: inline-block;
+  position: relative;
+}
+
+/* Primary modal button -> green pill */
+.swal-button {
+  font-family: var(--font);
+  border: 2px solid var(--sz-green);
+  border-radius: var(--sz-radius-pill);
+  background-color: var(--sz-green);
+  color: var(--sz-white);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 12px 26px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.swal-button:not([disabled]):hover { background-color: var(--sz-green-dk); border-color: var(--sz-green-dk); }
+.swal-button:active  { background-color: var(--sz-green-dk); }
+.swal-button:focus   { outline: none; box-shadow: var(--sz-shadow-focus); }
+.swal-button[disabled] { opacity: 0.5; cursor: default; }
+
+/* Cancel -> outlined green ghost */
+.swal-button--cancel {
+  background-color: transparent;
+  color: var(--sz-green);
+  border: 2px solid var(--sz-green);
+}
+.swal-button--cancel:not([disabled]):hover { background-color: var(--sz-green); color: var(--sz-white); }
+.swal-button--cancel:active { background-color: var(--sz-green-dk); border-color: var(--sz-green-dk); }
+
+/* Danger -> brand red */
+.swal-button--danger { background-color: var(--sz-red); border-color: var(--sz-red); }
+.swal-button--danger:not([disabled]):hover { filter: brightness(0.95); }
+.swal-button--danger:focus { box-shadow: 0 0 0 3px rgba(156, 34, 40, 0.25); }
+
+/* Modal inputs */
+.swal-content { padding: 0 20px; margin-top: 20px; font-size: medium; }
+.swal-content:last-child { margin-bottom: 20px; }
+
+.swal-content__input,
+.swal-content__textarea {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 13px;
+  font-size: 14px;
+  font-family: var(--font);
+  color: var(--sz-brown);
+  background-color: var(--sz-white);
+  border: 2px solid var(--sz-brown);
+  border-radius: var(--sz-radius-input);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.swal-content__input:focus,
+.swal-content__textarea:focus {
+  outline: none;
+  border-color: var(--sz-green);
+  box-shadow: var(--sz-shadow-focus);
+}
+.swal-content__textarea { resize: vertical; }
+
+/* Icons — brand-aligned colors */
+.swal-icon {
+  width: 80px; height: 80px;
+  border-width: 4px; border-style: solid; border-radius: 50%;
+  box-sizing: content-box;
+  margin: 20px auto;
+  position: relative;
+}
+.swal-icon--success { border-color: var(--sz-green); }
+.swal-icon--success__line { background-color: var(--sz-green); }
+.swal-icon--warning { border-color: var(--sz-yellow); }
+.swal-icon--warning__body,
+.swal-icon--warning__dot { background-color: var(--sz-yellow); }
+.swal-icon--error { border-color: var(--sz-red); }
+.swal-icon--error__line { background-color: var(--sz-red); }
+
+
+/* ---------- Responsive ---------- */
+@media only screen and (max-width: 550px) {
+  .form-signin {
+    width: 100% !important;
+    display: flex;
+    flex-flow: column;
+  }
+  .container::before { width: 95%; }
+  .contrast-red { width: 95%; display: flex; }
+  .login-title { width: 95% !important; }
+}
